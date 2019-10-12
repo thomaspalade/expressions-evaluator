@@ -1,0 +1,44 @@
+SHORT DESCRIPTION
+A project that evaluates mathematical expressions. It works for any expression containing numbers, words or characters that codify numbers, 
+as long as these are declared in the input. 
+The program evaluates the expression's final value and prints it, or an error, if the calculus cannot be computed. 
+
+IMPORTANT DATA STRUCTURES USED IN THIS PROGRAM
+struct arb -> This structure is used to save the info about the binary tree used to solve the problem
+struct variabila -> This structure has 2 important components: a string and a int value and it is used to save data about the initial array 
+
+Converteste/Convert -> Accepts as a parameter a string which codifies a number and it returns the integer value of the number
+E_Numar/Is_Number -> Accepts as a parameter a string which may codify an integer number. This function returns 1 if the string represents an actual integer. The function returns 0, otherwise.
+
+Citeste/Read -> This function reads and saves an char array 
+Gaseste/Find -> This function searches through an array. It returns the position where a certain value is found. Also, it returns -1, if the searched value is not found.
+Construieste/Build -> Recursive function, called only once in the main function. The function calls others functions which read input from text file and then builds the binary tree used to solve the problem.
+
+About data coding in this application:
+The operations will be represented by the nodes of a binary tree. Each node will have a left reference and a right reference, nodes too.
+The nodes will codify the arhitmatical operations: sum, difference, multiply, power and division.
+We also have the "so called" special operations, like sqrt, for instence. A node which codifies the sqrt operation will have only a left reference value.
+Therefore, the right reference value will be set to the NULL value, by default.
+The numbers and the intially declared variables will represent "leaves" in our binary tree, which means they have no left/right references.
+This concept has to be put in practice by asigning the NULL value to any node of this kind.
+
+Because the arithmetical operations ("+", "-", ... ) and the declared variables (aaa = 1, b = 3, sdasd = 10) represent characters, i've chosen to save them in the binary tree as numbers. 
+Therefore, we accept the next codification:
++    -> -99999998 
+-    -> -99999997
+*    -> -99999996
+/    -> -99999995
+^    -> -99999994
+sqrt -> -99999999
+
+If I want to insert in the tree an initially declared variable, i will firstly search for it in the array where I read the initially declared values and then I will insert directly the right value.
+If I have to insert in the tree a plain number, I will simply insert it as the way it is, no searches, no conversions, no codes.
+
+The last function, the most important one, is indeed Evalueaza/Compute.
+This function is, like some of the ones above, recursive. 
+The Evalueaza/Compute function computes the whole calculus.  
+The return value of this function is the either the right answer for the expression, either an error code.
+If the error code is -10000000, it means that along the calculus, the program had to divide to 0 (which is clearly imposible).
+If the error code is -9999999, it means that along the calculus, the program had to compute a calculus with an so called "initially undeclared variable"
+
+In the main function I call the Citire/Read function, and then, for the following N expressions to be computed, I build the binary tree using the Construieste/Build function and the compute the expression thanks to Evalueaza/Compute function.
